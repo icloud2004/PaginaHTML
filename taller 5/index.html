@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de registro de estudiantes">
+  <title>Registro de estudiantes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <span class="hero__eyebrow">Gestión académica</span>
+      <h1>Registro de estudiantes</h1>
+      <p>Administra la información estudiantil de forma rápida y segura.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card form-card" aria-labelledby="form-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__label">Formulario</p>
+          <h2 id="form-title">Nuevo estudiante</h2>
+        </div>
+        <span class="required-note">* Campos obligatorios</span>
+      </div>
+
+      <form id="student-form" novalidate>
+        <input type="hidden" id="student-id">
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="cedula">Cédula *</label>
+            <input id="cedula" name="cedula" type="text" inputmode="numeric"
+              maxlength="10" placeholder="Ej. 0912345678" autocomplete="off">
+            <small class="error" id="cedula-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="apellidos">Apellidos *</label>
+            <input id="apellidos" name="apellidos" type="text" maxlength="60"
+              placeholder="Ej. Pérez García" autocomplete="family-name">
+            <small class="error" id="apellidos-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="nombres">Nombres *</label>
+            <input id="nombres" name="nombres" type="text" maxlength="60"
+              placeholder="Ej. Andrea Sofía" autocomplete="given-name">
+            <small class="error" id="nombres-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="direccion">Dirección *</label>
+            <input id="direccion" name="direccion" type="text" maxlength="100"
+              placeholder="Ej. Av. Principal 123" autocomplete="street-address">
+            <small class="error" id="direccion-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="telefono">Teléfono *</label>
+            <input id="telefono" name="telefono" type="tel" inputmode="tel"
+              maxlength="10" placeholder="Ej. 0987654321" autocomplete="tel">
+            <small class="error" id="telefono-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="correo">Correo electrónico *</label>
+            <input id="correo" name="correo" type="email" maxlength="100"
+              placeholder="Ej. estudiante@correo.com" autocomplete="email">
+            <small class="error" id="correo-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="facultad">Facultad *</label>
+            <select id="facultad" name="facultad">
+              <option value="">Seleccione una facultad</option>
+              <option value="Ciencias Administrativas">Ciencias Administrativas</option>
+              <option value="Ciencias de la Salud">Ciencias de la Salud</option>
+              <option value="Ciencias Sociales">Ciencias Sociales</option>
+              <option value="Educación">Educación</option>
+              <option value="Ingeniería">Ingeniería</option>
+              <option value="Jurisprudencia">Jurisprudencia</option>
+            </select>
+            <small class="error" id="facultad-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="nivel">Nivel *</label>
+            <select id="nivel" name="nivel">
+              <option value="">Seleccione un nivel</option>
+              <option value="1">Primer nivel</option>
+              <option value="2">Segundo nivel</option>
+              <option value="3">Tercer nivel</option>
+              <option value="4">Cuarto nivel</option>
+              <option value="5">Quinto nivel</option>
+              <option value="6">Sexto nivel</option>
+              <option value="7">Séptimo nivel</option>
+              <option value="8">Octavo nivel</option>
+              <option value="9">Noveno nivel</option>
+              <option value="10">Décimo nivel</option>
+            </select>
+            <small class="error" id="nivel-error"></small>
+          </div>
+
+          <div class="field">
+            <label for="paralelo">Paralelo *</label>
+            <input id="paralelo" name="paralelo" type="text" maxlength="2"
+              placeholder="Ej. A" autocomplete="off">
+            <small class="error" id="paralelo-error"></small>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="button button--secondary hidden" id="cancel-button">
+            Cancelar edición
+          </button>
+          <button type="submit" class="button button--primary" id="submit-button">
+            Registrar estudiante
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card records-card" aria-labelledby="records-title">
+      <div class="section-heading records-heading">
+        <div>
+          <p class="section-heading__label">Directorio</p>
+          <h2 id="records-title">Estudiantes registrados</h2>
+        </div>
+        <div class="record-count"><strong id="student-count">0</strong> registros</div>
+      </div>
+
+      <div class="records-tools">
+        <div class="search-box">
+          <label class="sr-only" for="search">Buscar estudiante</label>
+          <input id="search" type="search" placeholder="Buscar por cédula, nombre, correo o facultad...">
+        </div>
+        <div class="faculty-filter">
+          <label class="sr-only" for="faculty-filter">Filtrar por facultad</label>
+          <select id="faculty-filter">
+            <option value="">Todas las facultades</option>
+            <option value="Ciencias Administrativas">Ciencias Administrativas</option>
+            <option value="Ciencias de la Salud">Ciencias de la Salud</option>
+            <option value="Ciencias Sociales">Ciencias Sociales</option>
+            <option value="Educación">Educación</option>
+            <option value="Ingeniería">Ingeniería</option>
+            <option value="Jurisprudencia">Jurisprudencia</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Cédula</th>
+              <th>Estudiante</th>
+              <th>Contacto</th>
+              <th>Facultad</th>
+              <th>Nivel</th>
+              <th>Paralelo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="student-list"></tbody>
+        </table>
+        <div class="empty-state" id="empty-state">
+          <div class="empty-state__icon">+</div>
+          <h3>No hay estudiantes registrados</h3>
+          <p>Completa el formulario para agregar el primer registro.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal hidden" id="confirm-modal" role="dialog" aria-modal="true"
+    aria-labelledby="modal-title">
+    <div class="modal__content">
+      <h2 id="modal-title">Eliminar registro</h2>
+      <p>¿Está seguro de eliminar a <strong id="student-to-delete"></strong>? Esta acción no se puede deshacer.</p>
+      <div class="modal__actions">
+        <button class="button button--secondary" id="keep-button" type="button">Cancelar</button>
+        <button class="button button--danger" id="delete-button" type="button">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
